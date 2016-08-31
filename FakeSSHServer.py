@@ -8,7 +8,7 @@ import threading
 import traceback
 import SocketServer
 import logging
-import random
+#import random
 
 import paramiko
 from paramiko.py3compat import b, u
@@ -17,8 +17,12 @@ PORT = 22
 LOG_FILE = 'fakessh.log'
 #RETURN_MESSAGE = 'no way to hack into my server noob!\r\n'
 RETURN_MESSAGE = None
-DENY_ALL = True
-PR_ALLOW = 20
+DENY_ALL = False
+#PR_ALLOW = 20
+PASSWORDS = [
+"test",
+"fake"
+]
 
 # setup logging
 logger = logging.getLogger("access.log")
@@ -48,9 +52,9 @@ class Server (paramiko.ServerInterface):
         logger.info('IP: %s, User: %s, Password: %s' % (self.client_address[0], username, password))
         if DENY_ALL == True:
             return paramiko.AUTH_FAILED
-        random.seed()
-        rand = random.randint(0, 99)
-        if (username == 'root') and (rand > (100 - PR_ALLOW)):
+        #random.seed()
+        #rand = random.randint(0, 99)
+        if (username == 'root') and (password in PASSWORDS):
             return paramiko.AUTH_SUCCESSFUL
         return paramiko.AUTH_FAILED
 

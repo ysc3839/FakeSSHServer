@@ -10,8 +10,11 @@ PORT = 22
 LOG_FILE = 'fakessh.log'
 #RETURN_MESSAGE = 'no way to hack into my server noob!\r\n'
 RETURN_MESSAGE = None
-DENY_ALL = True
-PR_ALLOW = 20
+DENY_ALL = False
+PASSWORDS = [
+"test",
+"fake"
+]
 ```
 
 `PORT`: Listen port.
@@ -22,4 +25,6 @@ PR_ALLOW = 20
 
 `DENY_ALL`: True = Deny all access.
 
-`PR_ALLOW`: The probability a user allowed log in.
+<del>`PR_ALLOW`: The probability a user allowed log in.</del>
+
+`PASSWORDS`: Passwords that allowed to log in.
